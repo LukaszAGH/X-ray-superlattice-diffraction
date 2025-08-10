@@ -1,20 +1,25 @@
-# 🧪 XRD Superlattice Simulator
-**Python-based command-line tool for simulating and comparing X-ray diffraction (XRD) spectra** of perovskite-based superlattices like **LSMO/BTO** and **PTO** on **STO substrates**.
+# 🧪 X-ray Spectra Generator
+Python-based command-line tool for simulating X-ray diffraction (XRD) spectra of perovskite-based nanomaterials and superlattices, including LSMO/BTO on STO substrates.
 
-📊 The tool supports performance comparison of different simulation algorithms (e.g. ideal vs Monte Carlo) and generates plots, output files, and benchmark visualizations.
+The program allows fully parameterized simulations for both ideal crystal lattices and Monte Carlo-based structures with random distortions, enabling the study of how defects and fluctuations affect diffraction spectra.
 
-Used in a scientific publication on Monte Carlo-based modeling of superlattice XRD - Journal of Applied Crystallography.
+Used as part of scientific research on Monte Carlo modeling of superlattice XRD — Journal of Applied Crystallography (**https://doi.org/10.1107/S160057672500370X**).
 
 ---
 
 ## 🚀 Features
 
-- ✅ Multiple calculation modes: `ideal` and `monte_carlo`
-- ⚙️ Multi-threaded and sequential simulation modes
-- 🔍 Configurable d-spacing, theta range, resolution and noise
-- 🧩 5 predefined use cases (LSMO/BTO & PTO)
-- 📈 Auto-generated plots and optional peak highlighting
-- 🧪 Scientific-grade output ready for further analysis
+- ✅ Fully configurable simulations – no predefined scenarios, full control over parameters
+
+- 🧮 Ideal and Monte Carlo calculation modes
+
+- 📊 Performance reports after each run – execution time, CPU usage, and RAM usage graphs
+
+- 📦 Built-in atomic_data database with experimental scattering coefficients for multiple elements (customizable)
+
+- 🖼️ One combined result image – all plots in a single figure for easy comparison
+
+- 🔬 Suitable for scientific-grade analysis and automated processing via CLI
 
 ---
 
@@ -30,82 +35,77 @@ pip install -r requirements.txt
 
 ## ▶️ Basic Usage
 
-Run the program from the Windows command line:
+Run a minimal simulation from the command line:
 
 ```commandline
-python superlattice_calc_program.py --use_case <1–5> [options...]
+python x_ray_spectra_gen.py --extMinTh 20 --extMaxTh 80 --select_version ideal1
 ```
 
-### 🧰 Example (Use Case 1, LSMO/BTO simulation):
+### ⚡ Advanced Usage
+Example with full parameterization:
 
 ```commandline
-python superlattice_calc_program.py --use_case 1 \
-  --dA_values "3.876/2.0" \
-  --dB_values "4.036/2.0" \
-  --prefixes "_1_ _2_ _3_" \
-  --calc_types ideal1 ideal2 monte_carlo \
-  --snat_values 0.0 0.0 0.6
+python x_ray_spectra_gen.py \
+  --extMinTh 20 --extMaxTh 80 \
+  --divided 1000 --minTheta 0.0 --angleLimit 90.0 \
+  --dA 1.938 --dB 2.018 --dSubs 1.9525 --dBuff 1.98 \
+  --nSubs 20000 --nBuff 0 --nA 14 --nB 9 --nRepeat 6 \
+  --select_version "ideal1 ideal2 monte_carlo" \
+  --buffer_enabled False --LSMO True \
+  --fSubs1 "Sr" --fSubs2 "Ti" --fSubs3 "O" \
+  --fBuff1 "Sr" --fBuff2 "Ru" --fBuff3 "O" \
+  --fA1a "La" --fA1b "Sr" --fA2 "Mn" --fA3 "O" \
+  --fB1 "Ba" --fB2 "Ti" --fB3 "O"
 ```
 
 🎥 Program execution:
 
-![Simulation Preview](sample_results/python_run_video_case1.gif)
+![Simulation Preview](sample_results/sample_exec.png)
 
 🩻 Generated results:
-![Simulation Preview](sample_results/lsmo_bto_chart.png)
-
----
-
-## 🔁 Available Use Cases
-
-| Use Case | Description                                                     |
-| -------- | --------------------------------------------------------------- |
-| `1`      | LSMO/BTO comparison (30–80°): `ideal1`, `ideal2`, `monte_carlo` |
-| `2`      | LSMO/BTO with different d-spacings in 60–80°                    |
-| `3`      | Broad scan 10–120° with Monte Carlo on multiple structures      |
-| `4`      | Internal test case using `geo_intensity_3` (40–50°)             |
-| `5`      | PTO-based superlattice on STO (10–60°)                          |
+![Simulation Preview](sample_results/lsmo_bto_sample.png)
 
 ---
 
 ## ⚙️ Arguments
 
-| Flag            | Type  | Description                                              |
-| --------------- | ----- |----------------------------------------------------------|
-| `--use_case`    | int   | Required. Use case number (1–5)                          |
-| `--divided`     | int   | Number of angle divisions (default: 3600)                |
-| `--minTheta`    | float | Minimum theta (°) (default: 0.0)                         |
-| `--angleLimit`  | float | Maximum theta (°) (default: 90.0)                        |
-| `--divider`     | int   | Intensity scaling divisor (default: 1)                   |
-| `--threaded`    | flag  | Use multi-threaded (not only) performance comparisons    |
-| `--dA_values`   | list  | d-spacing for layer A (e.g. `"3.876/2.0"`)               |
-| `--dB_values`   | list  | d-spacing for layer B (e.g. `"4.036/2.0"`)               |
-| `--prefixes`    | list  | Output file name suffixes                                |
-| `--calc_types`  | list  | Calculation methods: `ideal1`, `ideal2`, `monte_carlo`   |
-| `--snat_values` | list  | Standard deviation of lattice fluctuations (for Monte Carlo) |
-
----
-
-## 📄 Real Experimental Data Usage
-
-This program also utilizes real experimental data obtained from an XRD measurement of the LSMO/BTO sample.
-
-The data is stored in the file `sample_line_det.txt`.
-
-- The measurement covers the theta angle range from 15° to 120°.
-- This real dataset is used in Use Cases 1, 2, and 3 to simulate and analyze the diffraction spectra with actual measurement input.
-
-This enables the program not only to generate theoretical spectra but also to compare and validate the simulations against true experimental results.
+| Flag                                 | Type  | Description                                                     |
+| ------------------------------------ | ----- | --------------------------------------------------------------- |
+| `--divided`                          | int   | Number of angle divisions (default: 3600)                       |
+| `--minTheta`                         | float | Minimum theta (°) (default: 0.0)                                |
+| `--angleLimit`                       | float | Maximum theta (°) (default: 90.0)                               |
+| `--extMinTh`                         | float | Minimum displayed angle (°) (default: 30.0)                     |
+| `--extMaxTh`                         | float | Maximum displayed angle (°) (default: 60.0)                     |
+| `--dA`                               | float | d-spacing for layer A                                           |
+| `--dB`                               | float | d-spacing for layer B                                           |
+| `--divider`                          | int   | Intensity scaling divisor (default: 1)                          |
+| `--select_version`                   | str   | Calculation modes: `ideal1`, `ideal2`, `monte_carlo` (required) |
+| `--dSubs`                            | float | Substrate d-spacing                                             |
+| `--dBuff`                            | float | Buffer d-spacing                                                |
+| `--nSubs`                            | int   | Number of substrate layers                                      |
+| `--nBuff`                            | int   | Number of buffer layers                                         |
+| `--nA`                               | int   | Number of A-site layers                                         |
+| `--nB`                               | int   | Number of B-site layers                                         |
+| `--nRepeat`                          | int   | Number of superlattice repeats                                  |
+| `--bulk_or_s`                        | str   | Output filename suffix                                          |
+| `--buffer_enabled`                   | bool  | Enable buffer layer (default: True)                             |
+| `--LSMO`                             | bool  | Use LSMO composition (default: True)                            |
+| `--fSubs1`–`--fSubs3`                | str   | Elements in substrate (default: Sr, Ti, O)                      |
+| `--fBuff1`–`--fBuff3`                | str   | Elements in buffer (default: Sr, Ru, O)                         |
+| `--fA1a`, `--fA1b`, `--fA2`, `--fA3` | str   | Elements in A-site                                              |
+| `--fB1`, `--fB2`, `--fB3`            | str   | Elements in B-site                                              |
 
 ---
 
 ## 📌 Notes
 
-- Some use cases generate multiple .txt output files and .png plots.
-- `monte_carlo` calculations use `--snat_values` to simulate random layer distortions.
-- Peak marking is automatically enabled in Use Case 2 (60-80°).
-- **The program is in a very preliminary version and dynamically supports only selected execution scenarios.**
+- The atomic_data file can be extended with new elements to create custom superlattice structures.
 
+- Resource usage graphs show total system usage (including other running processes).
+
+- Even though this is a simplified public release, it allows virtually unlimited XRD simulation configurations.
+
+- All results are saved as a single combined image containing diffraction spectra and performance metrics.
 ---
 
 ## 🧑‍🔬 Citation / Usage in Publications
