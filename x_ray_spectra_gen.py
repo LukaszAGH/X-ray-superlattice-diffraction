@@ -78,7 +78,7 @@ def monitor_resources(exec_times, cpu_usages, memory_usages, stop_event):
         memory_usages.append(psutil.virtual_memory().used / (1024 * 1024))  # MB
         time.sleep(0.1) #every 0.1s
 
-def geo_intensity(divided, minTheta, angleLimit, extMinTh, extMaxTh, dA, dB, divider, select_version, dSubs, dBuff, nSubs, nBuff, nA, mB, nRepeat, buffer_enabled=True, LSMO=True, fSubs1='Sr', fSubs2='Ti', fSubs3='O', fBuff1='Sr', fBuff2='Ru', fBuff3='O', fA1a='La', fA1b='Sr', fA2='Mn', fA3='O', fB1='Ba', fB2='Ti', fB3='O'):
+def geo_intensity(divided, minTheta, angleLimit, extMinTh, extMaxTh, dA, dB, divider, select_version, dSubs, dBuff, nSubs, nBuff, nA, mB, nRepeat, buffer_enabled=True, LSMO=True, fSubs1='Sr', fSubs2='Ti', fSubs3='O', fBuff1='Sr', fBuff2='Ti', fBuff3='O', fA1a='La', fA1b='Sr', fA2='Mn', fA3='O', fB1='Ba', fB2='Ti', fB3='O'):
 
     fSubs = [0.0] * 3
     fBuff = [0.0] * 3
@@ -430,7 +430,7 @@ def parse_arguments():
     parser.add_argument('--fSubs2', type=str, default='Ti', help='Substrate element 2')
     parser.add_argument('--fSubs3', type=str, default='O', help='Substrate element 3')
     parser.add_argument('--fBuff1', type=str, default='Sr', help='Buffer element 1')
-    parser.add_argument('--fBuff2', type=str, default='Ru', help='Buffer element 2')
+    parser.add_argument('--fBuff2', type=str, default='Ti', help='Buffer element 2')
     parser.add_argument('--fBuff3', type=str, default='O', help='Buffer element 3')
     parser.add_argument('--fA1a', type=str, default='La', help='A-site element 1a')
     parser.add_argument('--fA1b', type=str, default='Sr', help='A-site element 1b')

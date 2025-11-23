@@ -46,14 +46,14 @@ Example with full parameterization:
 
 ```commandline
 python x_ray_spectra_gen.py \
-  --extMinTh 20 --extMaxTh 80 \
-  --divided 1000 --minTheta 0.0 --angleLimit 90.0 \
+  --extMinTh 40 --extMaxTh 60 \
+  --divided 3600 --minTheta 0.0 --angleLimit 90.0 \
   --dA 1.938 --dB 2.018 --dSubs 1.9525 --dBuff 1.98 \
-  --nSubs 20000 --nBuff 0 --nA 14 --nB 9 --nRepeat 6 \
+  --nSubs 20000 --nBuff 0 --nA 14 --mB 9 --nRepeat 6 \
   --select_version "ideal1 ideal2 monte_carlo" \
   --buffer_enabled False --LSMO True \
   --fSubs1 "Sr" --fSubs2 "Ti" --fSubs3 "O" \
-  --fBuff1 "Sr" --fBuff2 "Ru" --fBuff3 "O" \
+  --fBuff1 "Sr" --fBuff2 "Ti" --fBuff3 "O" \
   --fA1a "La" --fA1b "Sr" --fA2 "Mn" --fA3 "O" \
   --fB1 "Ba" --fB2 "Ti" --fB3 "O"
 ```
@@ -70,7 +70,7 @@ python x_ray_spectra_gen.py \
 ## ⚙️ Arguments
 
 | Flag                                 | Type  | Description                                                     |
-| ------------------------------------ | ----- | --------------------------------------------------------------- |
+| ------------------------------------ | ----- |-----------------------------------------------------------------|
 | `--divided`                          | int   | Number of angle divisions (default: 3600)                       |
 | `--minTheta`                         | float | Minimum theta (°) (default: 0.0)                                |
 | `--angleLimit`                       | float | Maximum theta (°) (default: 90.0)                               |
@@ -91,7 +91,7 @@ python x_ray_spectra_gen.py \
 | `--buffer_enabled`                   | bool  | Enable buffer layer (default: True)                             |
 | `--LSMO`                             | bool  | Use LSMO composition (default: True)                            |
 | `--fSubs1`–`--fSubs3`                | str   | Elements in substrate (default: Sr, Ti, O)                      |
-| `--fBuff1`–`--fBuff3`                | str   | Elements in buffer (default: Sr, Ru, O)                         |
+| `--fBuff1`–`--fBuff3`                | str   | Elements in buffer (default: Sr, Ti, O)                         |
 | `--fA1a`, `--fA1b`, `--fA2`, `--fA3` | str   | Elements in A-site                                              |
 | `--fB1`, `--fB2`, `--fB3`            | str   | Elements in B-site                                              |
 
