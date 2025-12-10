@@ -13,6 +13,8 @@ Used as part of scientific research on Monte Carlo modeling of superlattice XRD 
 
 - 🧮 Ideal and Monte Carlo calculation modes
 
+- ⚡ Includes a parallelized version utilizing all CPU cores for multithreaded computation (`x_ray_spectra_gen_parallel.py`).
+
 - 📊 Performance reports after each run – execution time, CPU usage, and RAM usage graphs
 
 - 📦 Built-in atomic_data database with experimental scattering coefficients for multiple elements (customizable)
@@ -35,13 +37,20 @@ pip install -r requirements.txt
 
 ## ▶️ Basic Usage
 
+### Standard (single-threaded)
 Run a minimal simulation from the command line:
 
 ```commandline
 python x_ray_spectra_gen.py --extMinTh 20 --extMaxTh 80 --select_version ideal1
 ```
 
-### ⚡ Advanced Usage
+### ⚡ Parallel (multi-threaded)
+For faster calculation:
+```commandline
+python x_ray_spectra_gen_multithread_cpu.py --extMinTh 20 --extMaxTh 80 --select_version ideal1
+```
+
+### 🎛️ Advanced Usage Example
 Example with full parameterization:
 
 ```commandline
@@ -106,6 +115,10 @@ python x_ray_spectra_gen.py \
 - Even though this is a simplified public release, it allows virtually unlimited XRD simulation configurations.
 
 - All results are saved as a single combined image containing diffraction spectra and performance metrics.
+
+- The parallel version (`x_ray_spectra_gen_multithread_cpu.py`) splits the angle range into chunks processed by separate CPU cores.
+
+- A high-performance CUDA-accelerated version is located in the cuda_gpu/ directory for users with NVIDIA graphics cards.
 ---
 
 ## 🧑‍🔬 Citation / Usage in Publications
