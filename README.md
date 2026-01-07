@@ -54,17 +54,7 @@ python x_ray_spectra_gen_multithread_cpu.py --extMinTh 20 --extMaxTh 80 --select
 Example with full parameterization:
 
 ```commandline
-python x_ray_spectra_gen.py \
-  --extMinTh 40 --extMaxTh 60 \
-  --divided 3600 --minTheta 0.0 --angleLimit 90.0 \
-  --dA 1.938 --dB 2.018 --dSubs 1.9525 --dBuff 1.98 \
-  --nSubs 20000 --nBuff 0 --nA 14 --mB 9 --nRepeat 6 \
-  --select_version "ideal1 ideal2 monte_carlo" \
-  --buffer_enabled False --LSMO True \
-  --fSubs1 "Sr" --fSubs2 "Ti" --fSubs3 "O" \
-  --fBuff1 "Sr" --fBuff2 "Ti" --fBuff3 "O" \
-  --fA1a "La" --fA1b "Sr" --fA2 "Mn" --fA3 "O" \
-  --fB1 "Ba" --fB2 "Ti" --fB3 "O"
+python x_ray_spectra_gen.py --extMinTh 40 --extMaxTh 60 --divided 3600 --minTheta 0.0 --angleLimit 90.0 --dA 1.938 --dB 2.018 --dSubs 1.9525 --dBuff 1.98 --nSubs 20000 --nBuff 0 --nA 14 --mB 9 --nRepeat 6 --select_version "ideal1 ideal2 monte_carlo" --buffer_enabled False --LSMO True --fSubs1 "Sr" --fSubs2 "Ti" --fSubs3 "O" --fBuff1 "Sr" --fBuff2 "Ti" --fBuff3 "O" --fA1a "La" --fA1b "Sr" --fA2 "Mn" --fA3 "O" --fB1 "Ba" --fB2 "Ti" --fB3 "O"
 ```
 
 🎥 Program execution:
